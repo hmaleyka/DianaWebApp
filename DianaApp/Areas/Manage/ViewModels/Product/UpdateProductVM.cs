@@ -15,6 +15,7 @@
         public List<int>? MaterialIds { get; set; }
 
         public IFormFile? photo { get; set; }
+        public IFormFile? additionalphotos { get; set; }
         public List<ProductImagesVm>? allproductImages { get; set; }
 
         public List<int>? ImageIds { get; set; }

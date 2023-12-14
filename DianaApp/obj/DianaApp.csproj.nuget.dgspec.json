@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\II novbe\\source\\repos\\DianaApp\\DianaApp\\DianaApp.csproj": {}
+    "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\DianaApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\II novbe\\source\\repos\\DianaApp\\DianaApp\\DianaApp.csproj": {
+    "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\DianaApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\II novbe\\source\\repos\\DianaApp\\DianaApp\\DianaApp.csproj",
+        "projectUniqueName": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\DianaApp.csproj",
         "projectName": "DianaApp",
-        "projectPath": "C:\\Users\\II novbe\\source\\repos\\DianaApp\\DianaApp\\DianaApp.csproj",
-        "packagesPath": "C:\\Users\\II novbe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\II novbe\\source\\repos\\DianaApp\\DianaApp\\obj\\",
+        "projectPath": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\DianaApp.csproj",
+        "packagesPath": "C:\\Users\\owner\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\II novbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.25, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.14, )"
@@ -82,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

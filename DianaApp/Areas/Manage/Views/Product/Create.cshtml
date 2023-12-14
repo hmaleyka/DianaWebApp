@@ -1,0 +1,74 @@
+﻿@using DianaApp.Areas.Manage.ViewModels.Product;
+@model CreateProductVM
+
+<div class="container" style="background-color:white">
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="mb-3" col-md-3 style="margin-right: 30px;">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" style="background-color:white">
+                <span asp-validation-for="Name" style="color: red"></span>
+            </div>
+            <div class="mb-3" col-md-3 style="margin-right: 30px;">
+                <label asp-for="Price" class="form-label">Price</label>
+                <input asp-for="Price" class="form-control" style="background-color:white">
+                <span asp-validation-for="Price" style="color: red"></span>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="mb-3 col-md-6" style="margin-left:15px">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea class="form-control" asp-for="Description" rows="4" style="background-color:white"></textarea>
+                <span asp-validation-for="Description" style="color: red"></span>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label asp-for="CategoryId" class="form-label">Categories</label>
+                <select class="form-select" asp-for="CategoryId" asp-items="new SelectList(ViewBag.categories,nameof(Category.Id),nameof(Category.Name))">
+                    <option selected> Open this select menu</option>                  
+                </select>
+                <span asp-validation-for="CategoryId" style="color: red"></span>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label asp-for="SizeIds" class="form-label">Size</label>
+                <select class="form-select" asp-for="SizeIds" asp-items="new SelectList(ViewBag.sizes,nameof(Size.Id),nameof(Size.sizename))">                                 
+                </select>
+                <span asp-validation-for="SizeIds" style="color: red"></span>
+            </div>
+             <div class="mb-3 col-md-3">
+                <label asp-for="ColorIds" class="form-label">Color</label>
+                <select class="form-select" asp-for="ColorIds"  asp-items="new SelectList(ViewBag.colors,nameof(Color.Id),nameof(Color.colors))" style="color:white">
+                </select>
+                <span asp-validation-for="ColorIds" style="color: red"></span>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label asp-for="MaterialIds" class="form-label">Material</label>
+                <select class="form-select" asp-for="MaterialIds" asp-items="new SelectList(ViewBag.materials,nameof(Material.Id),nameof(Material.materialName))">
+                </select>
+                <span asp-validation-for="SizeIds" style="color: red"></span>
+            </div>
+
+            <div class="row">
+                <div class="mb-3" col-md-3 style="margin-right: 30px;">
+                    <label asp-for="Photo" class="form-label">mainPhoto</label>
+                    <input asp-for="Photo" class="form-control">
+                    <span asp-validation-for="Photo" style="color: red"></span>
+                </div>
+            </div>
+            <div class="mb-3" col-md-3 style="margin-right: 30px;">
+                <label asp-for="additionalImages" class="form-label">additionalImages</label>
+                <input asp-for="additionalImages" class="form-control">
+                <span asp-validation-for="additionalImages" style="color: red"></span>
+            </div>
+
+
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+</div>

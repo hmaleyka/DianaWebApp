@@ -1,70 +1,95 @@
-﻿@*@using DianaApp.Areas.Manage.ViewModels.Product;
-﻿@model CreateProductVM
+﻿@model List<Product>
 
-<div class="container">
+@{
+    int count = 0;
+    int sizecount = 0;
+    int colorcount = 0;
+    int materialcount = 0;
+}
+<div class="container" style="background-color:white">
+    <div class="d-flex" style="justify-content:space-between;align-items:center">
+        <h1>Products</h1>
+        <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Create</a>
 
-    <form method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="mb-3" col-md-3 style="margin-right: 30px;">
-                <label asp-for="Name" class="form-label">Name</label>
-                <input asp-for="Name" class="form-control">
-                <span asp-validation-for="Name" style="color: red"></span>
-            </div>
-          
-            <div class="mb-3" col-md-3 style="margin-right: 30px;">
-                <label asp-for="Price" class="form-label">Price</label>
-                <input asp-for="Price" class="form-control">
-                <span asp-validation-for="Price" style="color: red"></span>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="mb-3 col-md-6" style="margin-left:15px">
-                <label asp-for="Description" class="form-label">Description</label>
-                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
-                <span asp-validation-for="Description" style="color: red"></span>
-            </div>
-            <div class="mb-3 col-md-3">
-                <label asp-for="CategoryId" class="form-label">Categories</label>
-                <select class="form-select" asp-for="CategoryId" asp-items="new SelectList(ViewBag.categories,nameof(Category.Id),nameof(Category.Name))">
-                    <option selected> Open this select menu</option>                  
-                </select>
-                <span asp-validation-for="CategoryId" style="color: red"></span>
-            </div>
-            <div class="mb-3 col-md-3">
-                <label asp-for="TagIds" class="form-label">Tags</label>
-                <select class="form-select" asp-for="TagIds" asp-items="new SelectList(ViewBag.tags,nameof(Tag.Id),nameof(Tag.Name))">                                 
-                </select>
-                <span asp-validation-for="TagIds" style="color: red"></span>
-            </div>
+    </div>
+    <span style="color:red">@TempData["Error"]</span>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>              
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Colors</th>
+                <th scope="col">Sizes</th>
+                <th scope="col">Materials</th>
+                <th scope="col">MainPhoto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
 
-            <div class="row">
-                <div class="mb-3" col-md-3 style="margin-right: 30px;">
-                    <label asp-for="mainPhoto" class="form-label">mainPhoto</label>
-                    <input asp-for="mainPhoto" class="form-control">
-                    <span asp-validation-for="mainPhoto" style="color: red"></span>
-                </div>
-                <div class="mb-3" col-md-3 style="margin-right: 30px;">
-                    <label asp-for="hoverPhoto" class="form-label">hoverPhoto</label>
-                    <input asp-for="hoverPhoto" class="form-control">
-                    <span asp-validation-for="hoverPhoto" style="color: red"></span>
-                </div>
-                <div class="mb-3" col-md-3 style="margin-right: 30px;">
-                    <label asp-for="multipleImages" class="form-label">multipleImages</label>
-                    <input asp-for="multipleImages" class="form-control">
-                    <span asp-validation-for="multipleImages" style="color: red"></span>
-                </div>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    
+                    <td>@item.Price</td>
+                    <td>@item.category.Name</td>
+                    <td>
+                        @foreach (var pt in item.Color)
+                        {
+                            colorcount++;
+                            @pt.color.color
+
+                            @(item.Color.Count == colorcount ? "" : ", ")
+                        }
+                        @{
+                            colorcount = 0;
+                        }
+                    </td>
+
+                    <td>
+                        @foreach (var pt in item.Sizes)
+                        {
+                            colorcount++;
+                            @pt.Size.sizename
+
+                            @(item.Sizes.Count == sizecount ? "" : ", ")
+                        }
+                        @{
+                            sizecount = 0;
+                        }
+                    </td>
+                    <td style="color:white">
+                        @foreach (var pt in item.Materials)
+                        {
+                            materialcount++;
+                            @pt.material.materialName
+
+                            @(item.Materials.Count == materialcount ? "" : ", ")
+                        }
+                        @{
+                            materialcount = 0;
+                        }
+                    </td>
+                    <td>
+                        <div style="width:100px">
+                            <img width="100%" src="~/Upload/Product/@item.Images.FirstOrDefault()?.ImgUrl">
+                        </div>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                        <a class="btn btn-danger item-delete" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
 
 
-            </div>
-
-
-
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-    </form>
-
-
-</div>*@
+        </tbody>
+    </table>
+</div>
