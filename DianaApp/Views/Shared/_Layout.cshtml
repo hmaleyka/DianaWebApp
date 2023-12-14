@@ -211,8 +211,22 @@
                                     <a class="title" href="javascript:;"><i class="fa fa-user-o"></i></a>
                                     <ul class="user-dropdown">
                                         <li class="user">
-                                            <ul>
-                                                <li><a href="#/">Login</a></li>
+                                            <ul >
+                                                @if(User.Identity.IsAuthenticated)
+                                                {
+                                                <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                                                    <li ><a asp-controller="Account" asp-action="LogIn">Login</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <a class="dropdown-item" asp-action="LogIn" asp-controller="Account" asp-route-ReturnUrl=@Context.Request.Path>Login</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" asp-action="Register" asp-controller="Account">Register</a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </li>
                                     </ul>

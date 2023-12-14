@@ -37,7 +37,7 @@
             </div>
              <div class="mb-3 col-md-3">
                 <label asp-for="ColorIds" class="form-label">Color</label>
-                <select class="form-select" asp-for="ColorIds"  asp-items="new SelectList(ViewBag.colors,nameof(Color.Id),nameof(Color.colors))" style="color:white">
+                <select class="form-select" asp-for="ColorIds"  asp-items="new SelectList(ViewBag.colors,nameof(Color.Id),nameof(Color.color))" >
                 </select>
                 <span asp-validation-for="ColorIds" style="color: red"></span>
             </div>
@@ -45,7 +45,7 @@
                 <label asp-for="MaterialIds" class="form-label">Material</label>
                 <select class="form-select" asp-for="MaterialIds" asp-items="new SelectList(ViewBag.materials,nameof(Material.Id),nameof(Material.materialName))">
                 </select>
-                <span asp-validation-for="SizeIds" style="color: red"></span>
+                <span asp-validation-for="MaterialIds" style="color: red"></span>
             </div>
 
             <div class="row">

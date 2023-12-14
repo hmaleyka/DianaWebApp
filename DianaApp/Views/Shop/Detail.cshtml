@@ -102,16 +102,16 @@
                                                    
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div>        
                                         <div class="select-item">
                                             <div class="select-color-wrap">
                                                 <span>Color :</span>
-                                                <ul>
+                                                
                                                    @foreach (var item in Model.product.Color)
                                                     {
-                                                        <li class="orange">@item.color.color@(Model.product.Color.Count == count ? "" : ", ")</li>
+                                                        @item.color.color@(Model.product.Color.Count == count ? "" : ", ")
                                                     }
-                                                </ul>
+                                                
                                             </div>
                                         </div>
                                         <div class="select-item">

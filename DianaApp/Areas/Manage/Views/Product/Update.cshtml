@@ -34,7 +34,7 @@
             </div>
             <div class="mb-3 col-md-3">
                 <label asp-for="SizeIds" class="form-label">Size</label>
-                <select class="form-select" asp-for="SizeIds" asp-items="new SelectList(ViewBag.sizes,nameof(Size.Id),nameof(Size.sizes))">
+                <select class="form-select" asp-for="SizeIds" asp-items="new SelectList(ViewBag.sizes,nameof(Size.Id),nameof(Size.sizename))">
                 </select>
                 <span asp-validation-for="SizeIds" style="color: red"></span>
             </div>

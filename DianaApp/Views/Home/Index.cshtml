@@ -649,7 +649,10 @@
                                                             <div class="inner-content">
                                                                 <div class="product-thumb">
                                                                     <a asp-controller="Shop" asp-action="Detail" asp-route-id="@item.Id">
-                                                                        <img class="w-100" src="~/Upload/Product/@item.Images" alt="Image-HasTech">
+                                                                        
+                                                                        <img class="w-100" src="~/Upload/Product/@item.Images.FirstOrDefault(p=>p.IsPrime==true)?.ImgUrl" alt="Image-HasTech">
+                                                                            
+                                                                        
                                                                     </a>
                                                                     <div class="product-action">
                                                                         <div class="addto-wrap">
@@ -708,7 +711,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="chair" role="tabpanel" aria-labelledby="chair-tab">
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-sm-6 col-lg-4 col-xl-3">
                                         <!--== Start Shop Item ==-->
                                         <div class="product-item">
@@ -1107,7 +1110,7 @@
                                         </div>
                                         <!--== End Shop Item ==-->
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                             <div class="tab-pane fade" id="sofa" role="tabpanel" aria-labelledby="sofa-tab">
                                 <div class="row">

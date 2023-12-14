@@ -109,6 +109,28 @@ namespace DianaApp.Areas.Manage.Controllers
 
                 }
             }
+
+            if (createProductvm.MaterialIds != null)
+            {
+                foreach (var materialId in createProductvm.MaterialIds)
+                {
+                    bool resultMaterial = await _dbContext.materials.AnyAsync(c => c.Id == materialId);
+                    if (!resultMaterial)
+                    {
+                        ModelState.AddModelError("MaterialIds", "there is not such like material here");
+                        return View();
+                    }
+
+
+                    ProductMaterial productmaterial = new ProductMaterial()
+                    {
+                        Product = product,
+                        MaterialId= materialId
+                    };
+                    _dbContext.productsMaterials.AddAsync(productmaterial);
+
+                }
+            }
             if (!createProductvm.Photo.CheckType("image/"))
             {
                 ModelState.AddModelError("mainPhoto", "you must only apply the image");
@@ -420,12 +442,12 @@ namespace DianaApp.Areas.Manage.Controllers
             {
                 if (!updateproductvm.photo.CheckType("image/"))
                 {
-                    ModelState.AddModelError("mainPhoto", "you must only apply the image");
+                    ModelState.AddModelError("photo", "you must only apply the image");
                     return View();
                 }
                 if (!updateproductvm.photo.CheckLong(2097152))
                 {
-                    ModelState.AddModelError("mainPhoto", "picture should be less than 3 mb");
+                    ModelState.AddModelError("photo", "picture should be less than 3 mb");
                     return View();
                 }
                
@@ -440,57 +462,58 @@ namespace DianaApp.Areas.Manage.Controllers
                 };
                 existproduct.Images?.Add(newproductimage);
             }
-           
-            //if (updateproductvm.ImageIds == null)
-            //{
-            //    existproduct.Images.RemoveAll();
-            //}
-            //else
-            //{
-            //    var removeListImage = existproduct.Images?.Where(p => !updateproductvm.ImageIds.Contains(p.Id)).ToList();
-            //    if (removeListImage != null)
-            //    {
-            //        foreach (var image in removeListImage)
-            //        {
-            //            existproduct.Images.Remove(image);
-            //            FileManager.DeleteFile(image.ImgUrl, _env.WebRootPath, @"\Upload\Product\");
-            //        }
+
+            if (updateproductvm.ImageIds == null)
+            {
+               // var item = _dbContext.productsImage.FirstOrDefault();
+                existproduct.Images.RemoveAll(p=>p.IsPrime==false);
+            }
+            else
+            {
+                var removeListImage = existproduct.Images?.Where(p => !updateproductvm.ImageIds.Contains(p.Id)).ToList();
+                if (removeListImage != null)
+                {
+                    foreach (var image in removeListImage)
+                    {
+                        existproduct.Images.Remove(image);
+                        FileManager.DeleteFile(image.ImgUrl, _env.WebRootPath, @"\Upload\Product\");
+                    }
 
 
-            //    }
-            //    else
-            //    {
-            //        existproduct.Images.RemoveAll(p => p.ImgUrl);
-            //    }
+                }
+                else
+                {
+                    existproduct.Images.RemoveAll(p => p.IsPrime==false);
+                }
 
-            //}
-            //if (updateproductvm.additionalphotos != null)
-            //{
-            //    foreach (var photo in updateproductvm.additionalphotos)
-            //    {
-            //        if (!photo.CheckType("image/"))
-            //        {
-            //            TempData["Error"] += $"{photo.FileName} the format isn't correct \t";
-            //            continue;
+            }
+            if (updateproductvm.additionalphotos != null)
+            {
+                foreach (var photo in updateproductvm.additionalphotos)
+                {
+                    if (!photo.CheckType("image/"))
+                    {
+                        TempData["Error"] += $"{photo.FileName} the format isn't correct \t";
+                        continue;
 
-            //        }
-            //        if (!photo.CheckLong(2097152))
-            //        {
-            //            TempData["Error"] += $"{photo.FileName} the size of picture is not in right format \t";
+                    }
+                    if (!photo.CheckLong(2097152))
+                    {
+                        TempData["Error"] += $"{photo.FileName} the size of picture is not in right format \t";
 
-            //            continue;
-            //        }
+                        continue;
+                    }
 
-            //        ProductImage additionalphotos = new ProductImage()
-            //        {
+                    ProductImage additionalphotos = new ProductImage()
+                    {
 
-            //            ImgUrl = photo.Upload(_env.WebRootPath, @"\Upload\Product\"),
-            //            Product = existproduct
-            //        };
-            //        existproduct.Images?.Add(additionalphotos);
+                        ImgUrl = photo.Upload(_env.WebRootPath, @"\Upload\Product\"),
+                        Product = existproduct
+                    };
+                    existproduct.Images?.Add(additionalphotos);
 
-            //    }
-            //}
+                }
+            }
 
 
 
@@ -505,14 +528,24 @@ namespace DianaApp.Areas.Manage.Controllers
 
         public IActionResult Delete(int id)
         {
-
             var product = _dbContext.products.FirstOrDefault(p => p.Id == id);
+
+            var relatedProductImages = _dbContext.productsImage.Where(pt => pt.ProductId == id);
+            var relatedProductSizes = _dbContext.productsSizes.Where(pt => pt.ProductId == id);
+            var relatedProductMaterials = _dbContext.productsMaterials.Where(pt => pt.ProductId == id);
+            var relatedProductColors = _dbContext.productsColors.Where(pt => pt.ProductId == id);
+            _dbContext.productsColors.RemoveRange(relatedProductColors);
+            _dbContext.productsSizes.RemoveRange(relatedProductSizes);
+            _dbContext.productsMaterials.RemoveRange(relatedProductMaterials);
+            _dbContext.productsImage.RemoveRange(relatedProductImages);
+            if (product is null)
             {
-                return View("Error");
+                return View();
             }
-            
+            _dbContext.products.Remove(product);
             _dbContext.SaveChanges();
-            return Ok();
+            //return Ok();
+            return RedirectToAction(nameof(Index));
 
         }
     }
