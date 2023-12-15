@@ -1,4 +1,5 @@
 ﻿using DianaApp.Models;
+using DianaApp.Services;
 using DianaApp.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +50,7 @@ namespace DianaApp.Controllers
             }
             await _signInManager.SignInAsync(user, false);
             //await _userManager.AddToRoleAsync(user, UserRole.Member.ToString());
-
+            SendMailService.SendEmail(to: user.Email, name: user.Name);
             return RedirectToAction(nameof(Index), "Home");
         }
         public IActionResult LogIn()
