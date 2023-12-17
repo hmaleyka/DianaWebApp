@@ -20,7 +20,7 @@ namespace DianaApp.Services
                     From = new MailAddress("maleykaheybatova1011@gmail.com"),
                     Subject = "Welcome to DianaApp",
                     Body = $"<h1>Welcome to our Website :) {name} </h1>",
-                    IsBodyHtml=true
+                    IsBodyHtml = true
                 };
                 mailMessage.To.Add(to);
 

@@ -10,6 +10,8 @@ namespace DianaApp.ViewModels
         public List<ProductColor> colors { get; set; }
         public List<ProductSize> sizes { get; set; }
         public List<ProductMaterial> materials { get; set; }
+        public List<Slider> sliders { get; set; }
+        public List<Subscribe> subscribes { get; set; }
       
     }
 }

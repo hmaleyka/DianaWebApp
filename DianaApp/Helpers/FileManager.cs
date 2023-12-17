@@ -20,7 +20,6 @@
             }
             fileName = Guid.NewGuid().ToString() + fileName;
 
-            //string path = "C:\\Users\\owner\\Desktop\\manytomany.task\\manytomany.task\\wwwroot\\Upload\\SliderImage\\" + fileName;
 
             string path = envPath + folderName + fileName;
             using (FileStream stream = new FileStream(path, FileMode.Create))

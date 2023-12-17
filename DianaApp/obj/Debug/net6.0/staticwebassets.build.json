@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yWfHlMCdwATcREF8Mo//UOyMsDsEoEk4sXAF0VTuE0E=",
+  "Hash": "nraSZby39dvNpg4Ig88GEhToDA11ffaBAdG6Jjumx/c=",
   "Source": "DianaApp",
   "BasePath": "_content/DianaApp",
   "Mode": "Default",
@@ -4775,6 +4775,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Upload\\Product\\e854f00c-ecc4-4949-86f7-6f3d8aaa9d34OIP.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\Upload\\Slider\\0bc50476-246b-4871-aefa-a7b9ff63de1achairs.jpg",
+      "SourceId": "DianaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\",
+      "BasePath": "_content/DianaApp",
+      "RelativePath": "Upload/Slider/0bc50476-246b-4871-aefa-a7b9ff63de1achairs.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Slider\\0bc50476-246b-4871-aefa-a7b9ff63de1achairs.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\Upload\\Slider\\2a9a5dd7-987e-4dcd-9672-ab655530c4b0sofa.jpg",
+      "SourceId": "DianaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\",
+      "BasePath": "_content/DianaApp",
+      "RelativePath": "Upload/Slider/2a9a5dd7-987e-4dcd-9672-ab655530c4b0sofa.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Slider\\2a9a5dd7-987e-4dcd-9672-ab655530c4b0sofa.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\Upload\\Slider\\bef0e3dc-cc2a-4210-b6a1-0327efb05803cris.jpg",
+      "SourceId": "DianaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\owner\\Desktop\\DianaWebApp\\DianaApp\\wwwroot\\",
+      "BasePath": "_content/DianaApp",
+      "RelativePath": "Upload/Slider/bef0e3dc-cc2a-4210-b6a1-0327efb05803cris.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Slider\\bef0e3dc-cc2a-4210-b6a1-0327efb05803cris.jpg"
     }
   ]
 }

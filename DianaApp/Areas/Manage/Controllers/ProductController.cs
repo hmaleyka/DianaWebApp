@@ -2,6 +2,7 @@
 using DianaApp.DAL;
 using DianaApp.Helpers;
 using DianaApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace DianaApp.Areas.Manage.Controllers
             _dbContext = dbContext;
             _env = env;
         }
+        [Authorize(Roles ="Admin, Moderator")]
         public async Task <IActionResult> Index()
         {
             List<Product> products = await _dbContext.products.Include(p => p.category)
@@ -30,7 +32,7 @@ namespace DianaApp.Areas.Manage.Controllers
                 .Include(p => p.Images).ToListAsync();
             return View(products);
         }
-
+        [Authorize(Roles ="Admin")]
         public async Task <IActionResult> Create()
         {
             ViewBag.categories = await _dbContext.categories.ToListAsync();
@@ -40,7 +42,7 @@ namespace DianaApp.Areas.Manage.Controllers
 
             return View ();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductVM createProductvm)
         {
@@ -185,6 +187,7 @@ namespace DianaApp.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Update(int id)
         {
             Product product = await _dbContext.products.Include(p => p.category)
@@ -244,7 +247,7 @@ namespace DianaApp.Areas.Manage.Controllers
 
             return View(updateProductVM);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Update(UpdateProductVM updateproductvm)
         {
@@ -525,7 +528,7 @@ namespace DianaApp.Areas.Manage.Controllers
 
 
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var product = _dbContext.products.FirstOrDefault(p => p.Id == id);

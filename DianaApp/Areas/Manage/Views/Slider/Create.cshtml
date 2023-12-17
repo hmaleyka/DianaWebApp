@@ -1,0 +1,22 @@
+﻿
+@model CreateSliderVM
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" style="background-color:white">
+        <span asp-validation-for="Title" style="color:red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubTitle">SubTitle</label>
+        <input asp-for="SubTitle" class="form-control" style="background-color:white">
+        <span asp-validation-for="SubTitle" style="color:red"></span>
+    </div>
+    <div class="form-check">
+        <label asp-for="Image">Image</label>
+        <input asp-for="Image" class="form-control" style="background-color:white">
+        <span asp-validation-for="Image" style="color:red"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

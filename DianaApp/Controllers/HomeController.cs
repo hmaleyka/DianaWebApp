@@ -19,6 +19,7 @@ namespace DianaApp.Controllers
             {
                
                 products = await _context.products.Include(p => p.Images).ToListAsync(),
+                sliders = await _context.slider.ToListAsync(),
             };
             return View(homevm);
             

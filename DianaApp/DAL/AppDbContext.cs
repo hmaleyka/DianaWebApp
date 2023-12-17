@@ -23,5 +23,9 @@ namespace DianaApp.DAL
         public DbSet<ProductMaterial> productsMaterials { get; set; }
         public DbSet<Size> sizes { get; set; }
 
+        public DbSet<Setting> setting { get; set; }
+        public DbSet<Slider> slider { get; set; }
+        public DbSet<Subscribe> subscribe { get; set; }
+
     }
 }

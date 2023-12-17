@@ -1,4 +1,7 @@
-﻿using DianaApp.Models;
+﻿using Azure.Identity;
+using DianaApp.DAL;
+using DianaApp.Helpers;
+using DianaApp.Models;
 using DianaApp.Services;
 using DianaApp.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
@@ -12,12 +15,14 @@ namespace DianaApp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private AppDbContext _db;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, AppDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _db = db;
         }
         public IActionResult Register()
         {
@@ -49,7 +54,7 @@ namespace DianaApp.Controllers
                 return View();
             }
             await _signInManager.SignInAsync(user, false);
-            //await _userManager.AddToRoleAsync(user, UserRole.Member.ToString());
+            await _userManager.AddToRoleAsync(user, UserRole.Member.ToString());
             SendMailService.SendEmail(to: user.Email, name: user.Name);
             return RedirectToAction(nameof(Index), "Home");
         }
@@ -109,21 +114,40 @@ namespace DianaApp.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
-        //public async Task<IActionResult> CreateRole()
-        //{
+        public async Task<IActionResult> CreateRole()
+        {
+            foreach (UserRole item in Enum.GetValues(typeof(UserRole)))
+            {
+                if(await _roleManager.FindByNameAsync(item.ToString())==null) 
+                {
+                    await _roleManager.CreateAsync(new IdentityRole() 
+                    {
+                        Name = item.ToString() 
+                    });
 
-        //    foreach (UserRole item in Enum.GetValues(typeof(UserRole)))
-        //    {
-        //        if (await _roleManager.FindByNameAsync(item.ToString()) == null)
-        //        {
-        //            await _roleManager.CreateAsync(new IdentityRole()
-        //            {
-        //                Name = item.ToString(),
-        //            });
-        //        }
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
+                }
+            }
+            return RedirectToAction("Index" , "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Subscribe(SubscribeVM subscribevm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
+            Subscribe subscribe = new Subscribe()
+            {
+                Id= subscribevm.Id,
+                Email = subscribevm.Email,
+            };
+            await _db.subscribe.AddAsync(subscribe);
+            await _db.SaveChangesAsync();
+
+            SendMailService.SendEmail(to: subscribevm.Email, name: "Diana App");
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
